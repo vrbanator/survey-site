@@ -119,7 +119,10 @@ function refresh() {
 
 function showResponses(data) {
 
-  data.reverse();
+  const displayName =
+  row[3] === "Yes"
+    ? ""
+    : row[1];
 
   let html = "";
 
@@ -138,21 +141,27 @@ function showResponses(data) {
       html += `
         <div class="card">
 
-          <div class="user">
-            ${row[1]}
-          </div>          
-
-          <div class="response">
-            ${row[2]}
-          </div>
-
-          <!--
-          <div class="time">
-            ${row[0]}
-          </div>
-          -->
-
+    ${
+      displayName
+      ? `
+        <div class="user">
+          ${displayName}
         </div>
+      `
+      : ""
+    }
+
+    <div class="response">
+      ${row[2]}
+    </div>
+
+    <!--
+    <div class="time">
+      ${row[0]}
+    </div>
+    -->
+
+  </div>
       `;
 
     });
