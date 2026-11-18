@@ -19,6 +19,18 @@ textarea{
 button{
   padding:10px 20px;
 }
+input[type="checkbox"]{
+  width:auto;
+  margin-bottom:0;
+  padding:0;
+}
+
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0;
+}
 </style>
 </head>
 
@@ -49,7 +61,7 @@ method="POST"
 
   <br>
 
-<label>
+<label class="checkbox-row">
   <input
     type="checkbox"
     name="anonymous"
