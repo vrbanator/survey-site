@@ -138,6 +138,11 @@ function showResponses(data) {
 
     data.forEach(row => {
 
+      const displayName =
+  row[3] === "Yes"
+    ? ""
+    : row[1];
+      
       html += `
         <div class="card">
 
