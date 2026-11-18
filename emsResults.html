@@ -1,88 +1,136 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Responses</title>
+  <title>EMS Survey Results</title>
 
-<style>
+  <style>
 
-body{
-  max-width:900px;
-  margin:50px auto;
-  font-family:Arial;
-  background:#f5f5f5;
-}
+    body{
+      max-width:900px;
+      margin:50px auto;
+      font-family:Arial, sans-serif;
+      background:#f5f5f5;
+      padding:20px;
+    }
 
-.card{
-  background:white;
-  padding:20px;
-  margin:10px 0;
-  border-radius:10px;
-  box-shadow:0 2px 4px rgba(0,0,0,.15);
-}
+    h1{
+      text-align:center;
+      color:#333;
+    }
 
-.user{
-  font-weight:bold;
-  color:#0066cc;
-}
+    .card{
+      background:white;
+      padding:20px;
+      margin:15px 0;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,.15);
+    }
 
-.time{
-  color:gray;
-  font-size:12px;
-}
+    .user{
+      font-weight:bold;
+      font-size:18px;
+      color:#0066cc;
+      margin-bottom:10px;
+    }
 
-</style>
+    .response{
+      font-size:16px;
+      line-height:1.4;
+      color:#222;
+    }
+
+    .time{
+      color:gray;
+      font-size:12px;
+      margin-top:10px;
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-<h1>Live Responses</h1>
+<h1>EMS Survey Responses</h1>
 
-<div id="feed"></div>
+<div id="feed">
+  Loading responses...
+</div>
 
 <script>
 
 const SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbxifUXOrSKpVGpauepoSaWTxrPVc9SqtIKnc_t6SnQUg2xWEHpaTu01B7fn5axf13L6Sw/exec";
 
-async function refresh(){
+function refresh() {
 
-  const data =
-    await fetch(SCRIPT_URL)
-      .then(r => r.json());
+  const oldScript =
+    document.getElementById("jsonp");
+
+  if (oldScript) {
+    oldScript.remove();
+  }
+
+  const script =
+    document.createElement("script");
+
+  script.id = "jsonp";
+
+  script.src =
+    SCRIPT_URL +
+    "?callback=showResponses&_=" +
+    Date.now();
+
+  document.body.appendChild(script);
+}
+
+function showResponses(data) {
 
   data.reverse();
 
-  let html = '';
+  let html = "";
 
-  data.forEach(row => {
+  if (data.length === 0) {
 
-    html += `
+    html = `
       <div class="card">
-
-        <div class="user">
-          ${row[1]}
-        </div>
-
-        <p>${row[2]}</p>
-
-        <div class="time">
-          ${row[0]}
-        </div>
-
+        No responses yet.
       </div>
     `;
 
-  });
+  } else {
 
-  document.getElementById('feed').innerHTML =
+    data.forEach(row => {
+
+      html += `
+        <div class="card">
+
+          <div class="user">
+            ${row[1]}
+          </div>
+
+          <div class="response">
+            ${row[2]}
+          </div>
+
+          <div class="time">
+            ${row[0]}
+          </div>
+
+        </div>
+      `;
+
+    });
+
+  }
+
+  document.getElementById("feed").innerHTML =
     html;
-
 }
 
 refresh();
 
-setInterval(refresh,5000);
+setInterval(refresh, 5000);
 
 </script>
 
