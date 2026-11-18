@@ -44,6 +44,28 @@
       font-size:12px;
       margin-top:10px;
     }
+    .qr-box{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:white;
+  padding:10px;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+  text-align:center;
+  width:150px;
+}
+
+.qr-box img{
+  width:120px;
+  height:120px;
+}
+
+.qr-title{
+  font-size:12px;
+  margin-bottom:8px;
+  font-weight:bold;
+}
 
   </style>
 
@@ -52,12 +74,19 @@
 <body>
 
 <h1>EMS Survey Responses</h1>
- <img
+ <div class="qr-box">
+
+  <div class="qr-title">
+    Scan to Respond
+  </div>
+  <img
     src="qrcode_vrbanator.github.io.png"
     alt="Take the Survey"
     width="200">
-  
-<div id="feed">
+ 
+ </div>
+
+  <div id="feed">
   Loading responses...
 </div>
 
