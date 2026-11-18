@@ -24,65 +24,37 @@ button{
 
 <body>
 
-<h1>Suggestion Box</h1>
+<h1>EMS Survey</h1>
 
-<input
-  id="user"
-  placeholder="Your Name">
+<p>
+<strong>Question:</strong><br>
+What do you think is essential training for new EMT's?
+</p>
+<form
+  action="https://script.google.com/macros/s/AKfycbxxlKIE2qI75P2N52dsO4vT1uQoYFGxYRpSAlA9DA5vpBJNNnHLuz5n2awzvwOKJOzttw/exec"
+  method="POST">
 
-<textarea
-  id="response"
-  rows="6"
-  placeholder="Enter your response">
-</textarea>
+  <input
+    name="user"
+    placeholder="Your Name"
+    required>
 
-<button onclick="submitResponse()">
-Submit
-</button>
+  <br><br>
 
-<p id="status"></p>
+  <textarea
+    name="response"
+    rows="6"
+    placeholder="Enter your response"
+    required></textarea>
 
-<script>
+  <br><br>
 
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbxxlKIE2qI75P2N52dsO4vT1uQoYFGxYRpSAlA9DA5vpBJNNnHLuz5n2awzvwOKJOzttw/exec";
+  <button type="submit">
+    Submit
+  </button>
 
-async function submitResponse(){
-
-  const user =
-    document.getElementById("user").value;
-
-  const response =
-    document.getElementById("response").value;
-
-  try{
-
-    await fetch(
-      SCRIPT_URL,
-      {
-        method:"POST",
-        body:JSON.stringify({
-          user:user,
-          response:response
-        })
-      }
-    );
-
-    document.getElementById("status").innerHTML =
-      "Submitted!";
-
-  }
-  catch(err){
-
-    document.getElementById("status").innerHTML =
-      "Error submitting.";
-
-    console.error(err);
-
-  }
-}
-
-</script>
+</form>
 
 </body>
+
 </html>
