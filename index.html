@@ -90,18 +90,14 @@ document
   .getElementById("surveyForm")
   .addEventListener("submit", function() {
 
+    const form = this;
+    
     document.getElementById("status")
       .innerHTML = "✅ Thank you! Your response has been submitted.";
 
     setTimeout(() => {
 
-      document.querySelector(
-        'input[name="user"]'
-      ).value = "";
-
-      document.querySelector(
-        'textarea[name="response"]'
-      ).value = "";
+     form.reset();
 
     }, 500);
 
