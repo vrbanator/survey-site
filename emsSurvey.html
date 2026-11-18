@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Suggestion Box</title>
+<style>
+body{
+  font-family:Arial;
+  max-width:800px;
+  margin:50px auto;
+}
+
+input,
+textarea{
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+}
+
+button{
+  padding:10px 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Suggestion Box</h1>
+
+<input
+  id="user"
+  placeholder="Your Name">
+
+<textarea
+  id="response"
+  rows="6"
+  placeholder="Enter your response">
+</textarea>
+
+<button onclick="submitResponse()">
+Submit
+</button>
+
+<p id="status"></p>
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbxxlKIE2qI75P2N52dsO4vT1uQoYFGxYRpSAlA9DA5vpBJNNnHLuz5n2awzvwOKJOzttw/exec";
+
+async function submitResponse(){
+
+  const user =
+    document.getElementById("user").value;
+
+  const response =
+    document.getElementById("response").value;
+
+  try{
+
+    await fetch(
+      SCRIPT_URL,
+      {
+        method:"POST",
+        body:JSON.stringify({
+          user:user,
+          response:response
+        })
+      }
+    );
+
+    document.getElementById("status").innerHTML =
+      "Submitted!";
+
+  }
+  catch(err){
+
+    document.getElementById("status").innerHTML =
+      "Error submitting.";
+
+    console.error(err);
+
+  }
+}
+
+</script>
+
+</body>
+</html>
