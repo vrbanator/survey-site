@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Suggestion Box</title>
 <style>
 body{
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   max-width:800px;
-  margin:50px auto;
+  margin:0 auto;
+  padding:20px;
+  background:#f5f5f5;
+}
+
+form{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
 }
 
 input,
 textarea{
   width:100%;
+  box-sizing:border-box;
   margin-bottom:10px;
-  padding:10px;
+  padding:12px;
+  font-size:16px;
 }
 
 button{
-  padding:10px 20px;
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  background:#0066cc;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
 }
+
+button:hover{
+  background:#0052a3;
+}
+
 input[type="checkbox"]{
   width:auto;
-  margin-bottom:0;
-  padding:0;
+  margin:0;
 }
 
 .checkbox-row{
@@ -31,6 +59,33 @@ input[type="checkbox"]{
   gap:8px;
   margin:10px 0;
 }
+@media (max-width: 600px){
+
+  body{
+    padding:10px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  textarea{
+    min-height:150px;
+  }
+
+  button{
+    font-size:20px;
+    padding:16px;
+  }
+
+}
+
+#status{
+  margin-top:15px;
+  font-weight:bold;
+  color:green;
+}
+
 </style>
 </head>
 
@@ -56,6 +111,7 @@ method="POST"
 
   <textarea
     name="response"
+    rows="8"
     placeholder="Your Response"
     required></textarea>
 
