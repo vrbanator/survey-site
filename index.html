@@ -27,12 +27,13 @@ button{
 <h1>EMS Survey</h1>
 
 <p>
-<strong>Question:</strong><br>
-What do you think is essential training for new EMT's?
+<strong>What do you think is essential training for new EMT's?</strong><br>
 </p>
 <form
+  id="surveyForm"
   action="https://script.google.com/macros/s/AKfycbxifUXOrSKpVGpauepoSaWTxrPVc9SqtIKnc_t6SnQUg2xWEHpaTu01B7fn5axf13L6Sw/exec"
-  method="POST">
+method="POST"
+  target="hiddenFrame">
 
   <input
     name="user"
@@ -43,8 +44,7 @@ What do you think is essential training for new EMT's?
 
   <textarea
     name="response"
-    rows="6"
-    placeholder="Enter your response"
+    placeholder="Your Response"
     required></textarea>
 
   <br><br>
@@ -54,6 +54,38 @@ What do you think is essential training for new EMT's?
   </button>
 
 </form>
+
+<iframe
+  name="hiddenFrame"
+  style="display:none;">
+</iframe>
+
+<p id="status"></p>
+
+  <script>
+
+document
+  .getElementById("surveyForm")
+  .addEventListener("submit", function() {
+
+    document.getElementById("status")
+      .innerHTML = "✅ Thank you! Your response has been submitted.";
+
+    setTimeout(() => {
+
+      document.querySelector(
+        'input[name="user"]'
+      ).value = "";
+
+      document.querySelector(
+        'textarea[name="response"]'
+      ).value = "";
+
+    }, 500);
+
+});
+
+</script>
 
 </body>
 
