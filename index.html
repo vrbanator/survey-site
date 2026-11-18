@@ -94,8 +94,11 @@ input[type="checkbox"]{
 <h1>EMS Survey</h1>
 
 <p>
-<strong>What do you think is essential training for new EMT's?</strong><br>
+<strong id="question">
+Loading question...
+</strong>
 </p>
+  
 <form
   id="surveyForm"
   action="https://script.google.com/macros/s/AKfycbxifUXOrSKpVGpauepoSaWTxrPVc9SqtIKnc_t6SnQUg2xWEHpaTu01B7fn5axf13L6Sw/exec"
@@ -142,6 +145,18 @@ method="POST"
 
   <script>
 
+    fetch(
+  "YOUR_APPS_SCRIPT_URL?question=true"
+)
+.then(r => r.text())
+.then(question => {
+
+  document
+    .getElementById("question")
+    .innerText = question;
+
+});
+    
 document
   .getElementById("surveyForm")
   .addEventListener("submit", function() {
